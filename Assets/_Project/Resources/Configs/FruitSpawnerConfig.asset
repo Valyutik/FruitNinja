@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3299b15a8744ca857832c688004b87, type: 3}
+  m_Name: FruitSpawnerConfig
+  m_EditorClassIdentifier: 
+  <FruitPrefabs>k__BackingField:
+  - {fileID: -1517200304426236218, guid: 81aa637b2ddd13e45b2d2a7288d93ffc, type: 3}
+  - {fileID: -6385806805282357241, guid: f2139971c8a5088409fcadea0f5bc5f7, type: 3}
+  - {fileID: -4462207350190382486, guid: 300b610d4c52e524eb725769b74b9256, type: 3}
+  - {fileID: -1953579519856234214, guid: 01060507ba083c547a34853012e75d8f, type: 3}
+  - {fileID: 5299239007505463400, guid: 418a5a238bfcdbe45b41e4e74b56ebf0, type: 3}
+  - {fileID: -1572474674912109941, guid: 629c7e938fd231841a9258086f990738, type: 3}
+  minDelay: 0.2
+  maxDelay: 0.9
+  angleRangeZ: 20
+  lifeTime: 7
+  minForce: 13
+  maxForce: 18
