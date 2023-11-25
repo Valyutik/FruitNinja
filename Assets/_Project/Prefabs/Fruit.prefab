@@ -96,6 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78230c25eff84fd2bb90465bfd9ee9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wholeFruit: {fileID: 8086976668156521615}
+  slicedFruit: {fileID: 8190631679567006541}
+  topPartRigidbody: {fileID: 5523931258970062379}
+  bottomPartRigidbody: {fileID: 8560279240951025860}
 --- !u!1001 &9006037892234629598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,6 +157,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ad28a332a3dc64c9bb32aaaec120ab, type: 3}
+--- !u!1 &8086976668156521615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e2ad28a332a3dc64c9bb32aaaec120ab, type: 3}
+  m_PrefabInstance: {fileID: 9006037892234629598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8895003723632686645 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e2ad28a332a3dc64c9bb32aaaec120ab, type: 3}
@@ -285,6 +294,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7265744515449303197, guid: b22ccd2b380c76e4da458f336955beb9, type: 3}
+--- !u!1 &8190631679567006541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b22ccd2b380c76e4da458f336955beb9, type: 3}
+  m_PrefabInstance: {fileID: 9037477382720206364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8854403085076222455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b22ccd2b380c76e4da458f336955beb9, type: 3}
