@@ -13,15 +13,14 @@ MonoBehaviour:
   m_Name: FruitSpawnerConfig
   m_EditorClassIdentifier: 
   <FruitPrefabs>k__BackingField:
-  - {fileID: -1517200304426236218, guid: 81aa637b2ddd13e45b2d2a7288d93ffc, type: 3}
-  - {fileID: -6385806805282357241, guid: f2139971c8a5088409fcadea0f5bc5f7, type: 3}
-  - {fileID: -4462207350190382486, guid: 300b610d4c52e524eb725769b74b9256, type: 3}
-  - {fileID: -1953579519856234214, guid: 01060507ba083c547a34853012e75d8f, type: 3}
-  - {fileID: 5299239007505463400, guid: 418a5a238bfcdbe45b41e4e74b56ebf0, type: 3}
-  - {fileID: -1572474674912109941, guid: 629c7e938fd231841a9258086f990738, type: 3}
+  - {fileID: 4325229926253813011, guid: 382eec285a54a1b479ee335598849692, type: 3}
+  - {fileID: 4325229926253813011, guid: 045ede127f7f8194784dccdec3ce2313, type: 3}
+  - {fileID: 4325229926253813011, guid: b6d4ce54419a97f48ba46bf930fcd71b, type: 3}
+  - {fileID: 4325229926253813011, guid: 33642368549beb2408ed55b03036d540, type: 3}
+  - {fileID: 4325229926253813011, guid: 72ebb81dba33a0740938666d55ffe6c5, type: 3}
   minDelay: 0.2
   maxDelay: 0.9
   angleRangeZ: 20
   lifeTime: 7
-  minForce: 13
-  maxForce: 18
+  minForce: 8
+  maxForce: 15

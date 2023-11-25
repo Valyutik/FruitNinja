@@ -5,7 +5,7 @@ namespace _Project.Scripts.Installers
 {
     public class GameplayInstaller : MonoInstaller
     {
-        [SerializeField] private Transform container;
+        [SerializeField] private Collider container;
         private FruitSpawnerConfig _fruitSpawnerConfig;
         
         public override void InstallBindings()
