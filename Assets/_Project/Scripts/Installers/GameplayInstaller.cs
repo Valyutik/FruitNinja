@@ -1,7 +1,6 @@
 using _Project.Scripts.Fruits;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Zenject;
 
 namespace _Project.Scripts.Installers
@@ -10,6 +9,12 @@ namespace _Project.Scripts.Installers
     {
         [Header("Fruits")]
         [SerializeField] private Collider container;
+        [SerializeField] private GameObject comboMultiplierRootGo;
+        [SerializeField] private TextMeshProUGUI comboMultiplierText;
+        [Range(0,10)]
+        [SerializeField] private float comboIncreaseInterval = 1.1f;
+        [Range(0,100)]
+        [SerializeField] private int comboMultiplierIncreaseStep = 3;
         
         [Header("Score")]
         [SerializeField] private TMP_Text scoreText;
@@ -38,8 +43,11 @@ namespace _Project.Scripts.Installers
             var health = new Health(startHealth, healthText);
             Container.Bind<Health>().FromInstance(health).AsSingle();
 
-            Container.Bind<GameEnder>().FromNew().AsSingle().WithArguments(gameScreen, gameEndScreen, gameEndScoreText)
-                .NonLazy();
+            Container.Bind<GameEnder>().FromNew().AsSingle().WithArguments(gameScreen, gameEndScreen, gameEndScoreText);
+
+            var fruitSlicerComboChecker = new FruitSlicerComboChecker(comboMultiplierRootGo, comboMultiplierText,
+                comboIncreaseInterval, comboMultiplierIncreaseStep);
+            Container.BindInterfacesAndSelfTo<FruitSlicerComboChecker>().FromInstance(fruitSlicerComboChecker).AsSingle();
         }
     }
 }

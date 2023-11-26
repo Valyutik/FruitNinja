@@ -3,6 +3,7 @@ using Zenject;
 
 namespace _Project.Scripts.Fruits
 {
+    [RequireComponent(typeof(Collider))]
     public sealed class FruitSlicer : MonoBehaviour
     {
         private const float MinSlicingMove = 0.01f;
@@ -10,6 +11,7 @@ namespace _Project.Scripts.Fruits
         [SerializeField] private float sliceForce = 65;
         
         private GameEnder _gameEnder;
+        private FruitSlicerComboChecker _comboChecker;
         private Score _score;
         private Health _health;
         private Collider _slicerTrigger;
@@ -17,9 +19,10 @@ namespace _Project.Scripts.Fruits
         private Vector3 _direction;
 
         [Inject]
-        public void Construct(GameEnder gameEnder, Score score, Health health)
+        public void Construct(GameEnder gameEnder, FruitSlicerComboChecker comboChecker, Score score, Health health)
         {
             _gameEnder = gameEnder;
+            _comboChecker = comboChecker;
             _score = score;
             _health = health;
             _slicerTrigger = GetComponent<Collider>();
@@ -42,17 +45,19 @@ namespace _Project.Scripts.Fruits
         private void CheckFruit(Component other)
         {
             var fruit = other.GetComponent<Fruit>();
-
             if (fruit == null)
             {
                 return;
             }
 
             fruit.Slice(_direction, transform.position, sliceForce);
-            _score.AddScore(1);
+            
+            _comboChecker.IncreaseComboStep();
+            var scoreByFruit = 1 * _comboChecker.GetComboMultiplier();
+            _score.AddScore(scoreByFruit);
         }
         
-        private void CheckBomb(Collider other)
+        private void CheckBomb(Component other) 
         {
             var bomb = other.GetComponent<Bomb>();
             if (bomb == null)
@@ -63,6 +68,8 @@ namespace _Project.Scripts.Fruits
             Destroy(bomb.gameObject);
             _health.RemoveHealth();
             CheckHealthEnd(_health.GetCurrentHealth());
+
+            _comboChecker.StopCombo();
         }
         
         private void CheckHealthEnd(int health)
@@ -99,7 +106,7 @@ namespace _Project.Scripts.Fruits
         
         private void RefreshSlicing()
         {
-            Vector3 targetPosition = GetTargetPosition();
+            var targetPosition = GetTargetPosition();
             RefreshDirection(targetPosition);
             MoveSlicer(targetPosition);
             var isSlicing = CheckMoreThenMinMove(_direction);

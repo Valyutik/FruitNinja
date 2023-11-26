@@ -2066,6 +2066,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 1088147408}
+  comboMultiplierRootGo: {fileID: 1644721866}
+  comboMultiplierText: {fileID: 1461166400}
+  comboIncreaseInterval: 1.1
+  comboMultiplierIncreaseStep: 3
   scoreText: {fileID: 456030999}
   healthText: {fileID: 583571633}
   startHealth: 3
