@@ -8,17 +8,20 @@ namespace _Project.Scripts.Fruits
     {
     private readonly GameObject _comboMultiplierRootGo;
     private readonly TMP_Text _comboMultiplierText;
+    private Animation _comboMultiplierAnimation;
+    private int _prevComboMultiplier;
     private readonly float _comboIncreaseInterval;
     private readonly int _comboMultiplierIncreaseStep;
     private float _comboTimer;
     private int _comboStep;
     private int _comboMultiplier;
 
-    public FruitSlicerComboChecker(GameObject comboMultiplierRootGo, TMP_Text comboMultiplierText,
+    public FruitSlicerComboChecker(GameObject comboMultiplierRootGo, TMP_Text comboMultiplierText, Animation comboMultiplierAnimation,
         float comboIncreaseInterval, int comboMultiplierIncreaseStep)
     {
         _comboMultiplierRootGo = comboMultiplierRootGo;
         _comboMultiplierText = comboMultiplierText;
+        _comboMultiplierAnimation = comboMultiplierAnimation;
         _comboIncreaseInterval = comboIncreaseInterval;
         _comboMultiplierIncreaseStep = comboMultiplierIncreaseStep;
 
@@ -52,6 +55,15 @@ namespace _Project.Scripts.Fruits
         CalculateComboMultiplier(value);
         DropComboTimer();
     }
+    
+    private void ComboMultiplierIncreaseAnimation()
+    {
+        if (_comboMultiplier > _prevComboMultiplier)
+        {
+            _comboMultiplierAnimation.Play(PlayMode.StopAll);
+        }
+        _prevComboMultiplier = _comboMultiplier;
+    }
 
     private void DropComboTimer()
     {
@@ -64,6 +76,7 @@ namespace _Project.Scripts.Fruits
 
         SetComboMultiplierText(_comboMultiplier);
         SetComboMultiplierShow(_comboMultiplier);
+        ComboMultiplierIncreaseAnimation();
     }
 
     private void SetComboMultiplierText(int value)

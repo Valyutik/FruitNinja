@@ -18,6 +18,9 @@ namespace _Project.Scripts.Fruits
         [SerializeField] private AudioClip bonusSound;
         [SerializeField] private float bonusSoundVolume = 0.7f;
         [SerializeField] private AudioSource soundPlayer;
+
+        [Header("Animations")]
+        [SerializeField] private Animation flashAnimation;
         
         private GameEnder _gameEnder;
         private FruitSlicerComboChecker _comboChecker;
@@ -65,6 +68,7 @@ namespace _Project.Scripts.Fruits
             }
 
             var healthForHeart = heart.HealthForHeart;
+            heart.ShowSliceParticles();
             Destroy(heart.gameObject);
             _comboChecker.IncreaseComboStep();
             _health.AddHealth(healthForHeart);
@@ -80,7 +84,7 @@ namespace _Project.Scripts.Fruits
             }
 
             var slowDuration = sandClocks.SlowDuration; 
-            
+            sandClocks.ShowSliceParticles();
             Destroy(sandClocks.gameObject);
             _comboChecker.IncreaseComboStep();
             _slowMotion.StartSlow(slowDuration);
@@ -116,6 +120,7 @@ namespace _Project.Scripts.Fruits
             CheckHealthEnd(_health.GetCurrentHealth());
             soundPlayer.PlayOneShot(bombSound, bombSoundVolume);
             _comboChecker.StopCombo();
+            flashAnimation.Play(PlayMode.StopAll);
         }
         
         private void CheckHealthEnd(int health)

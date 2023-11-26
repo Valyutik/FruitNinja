@@ -147,4 +147,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47ad0722500454f9834e9df4e4a60af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowDuration: 3
+  <SlowDuration>k__BackingField: 3
+  sandClockParticle: {fileID: 3964130793281065012, guid: 9ba4cf43f63eb86468bcb6aa5d2827b7, type: 3}

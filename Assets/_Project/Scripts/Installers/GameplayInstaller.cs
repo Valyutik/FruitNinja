@@ -12,10 +12,13 @@ namespace _Project.Scripts.Installers
         [SerializeField] private Collider container;
         [SerializeField] private GameObject comboMultiplierRootGo;
         [SerializeField] private TextMeshProUGUI comboMultiplierText;
+        
+        [Header("Combo")]
         [Range(0,10)]
         [SerializeField] private float comboIncreaseInterval = 1.1f;
         [Range(0,100)]
         [SerializeField] private int comboMultiplierIncreaseStep = 3;
+        [SerializeField] private Animation comboMultiplierAnimation;
         
         [Header("Game difficulty")]
         [Range(0,100)]
@@ -59,7 +62,7 @@ namespace _Project.Scripts.Installers
             Container.Bind<GameEnder>().FromNew().AsSingle().WithArguments(gameScreen, gameEndScreen, gameEndScoreText,
                 bestScoreText, backgroundMusic, gameOverSound);
 
-            var fruitSlicerComboChecker = new FruitSlicerComboChecker(comboMultiplierRootGo, comboMultiplierText,
+            var fruitSlicerComboChecker = new FruitSlicerComboChecker(comboMultiplierRootGo, comboMultiplierText, comboMultiplierAnimation,
                 comboIncreaseInterval, comboMultiplierIncreaseStep);
             Container.BindInterfacesAndSelfTo<FruitSlicerComboChecker>().FromInstance(fruitSlicerComboChecker).AsSingle();
 

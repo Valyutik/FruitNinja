@@ -73,7 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4307cf71a248437da7a3811db8bc7fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthForHeart: 1
+  <HealthForHeart>k__BackingField: 1
+  heartParticle: {fileID: 86561307822928307, guid: 8c8812d98c9485e4f9dbbcad2dd925e9, type: 3}
 --- !u!1 &3977757896669099442
 GameObject:
   m_ObjectHideFlags: 0
