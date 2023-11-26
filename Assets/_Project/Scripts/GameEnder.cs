@@ -12,9 +12,10 @@ namespace _Project.Scripts
         private readonly GameObject _gameScreen;
         private readonly GameObject _gameEndScreen;
         private readonly TMP_Text _gameEndScoreText;
+        private readonly TMP_Text _bestScoreText;
 
         public GameEnder(Score score, Health health, FruitSpawner fruitSpawner, GameObject gameScreen,
-            GameObject gameEndScreen, TMP_Text gameEndScoreText)
+            GameObject gameEndScreen, TMP_Text gameEndScoreText, TMP_Text bestScoreText)
         {
             _score = score;
             _health = health;
@@ -22,14 +23,15 @@ namespace _Project.Scripts
             _gameScreen = gameScreen;
             _gameEndScreen = gameEndScreen;
             _gameEndScoreText = gameEndScoreText;
+            _bestScoreText = bestScoreText;
             SwitchScreens(true);
         }
         
         public void EndGame()
         {
             _fruitSpawner.Stop();
-            SetGameEndScoreText(_score.GetScore());
             SwitchScreens(false);
+            RefreshScores();
         }
         
         public void RestartGame()
@@ -47,6 +49,45 @@ namespace _Project.Scripts
         {
             _gameScreen.SetActive(isGame);
             _gameEndScreen.SetActive(!isGame);
+        }
+        
+        private void RefreshScores()
+        {
+            var score = _score.GetScore();
+            var oldBestScore = _score.GetBestScore();
+            bool isNewBestScore = CheckNewBestScore(score, oldBestScore);
+            SetActiveGameEndScoreText(!isNewBestScore);
+
+            if (isNewBestScore)
+            {
+                _score.SetBestScore(score);
+                SetNewBestScoreText(score);
+            }
+            else
+            {
+                SetGameEndScoreText(score);
+                SetOldBestScoreText(oldBestScore);
+            }
+        }
+        
+        private bool CheckNewBestScore(int score, int oldBestScore)
+        {
+            return score > oldBestScore;
+        }
+        
+        private void SetOldBestScoreText(int value)
+        {
+            _bestScoreText.text = $"Лучший результат: {value}";
+        }
+
+        private void SetNewBestScoreText(int value)
+        {
+            _bestScoreText.text = $"Новый рекорд: {value}!";
+        }
+
+        private void SetActiveGameEndScoreText(bool value)
+        {
+            _gameEndScoreText.gameObject.SetActive(value);
         }
         
         private void SetGameEndScoreText(int value)
