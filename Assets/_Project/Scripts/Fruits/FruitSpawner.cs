@@ -9,18 +9,36 @@ namespace _Project.Scripts.Fruits
     {
         private readonly FruitSpawnerConfig _config;
         private readonly Collider _container;
+        private readonly Transform _containerTransform;
         private float _currentDelay;
+        private bool _isActive = true;
 
         public FruitSpawner(FruitSpawnerConfig config, Collider container)
         {
             _config = config;
             _container = container;
+            _containerTransform = container.transform;
             SetNewDelay();
         }
         
         public void Tick()
         {
+            if (!_isActive)
+            {
+                return;
+            }
             MoveDelay();
+        }
+        
+        public void Stop()
+        {
+            _isActive = false;
+        }
+        
+        public void Restart()
+        {
+            _isActive = true;
+            SetNewDelay();
         }
         
         private void SetNewDelay()
@@ -63,7 +81,7 @@ namespace _Project.Scripts.Fruits
         {
             var startPosition = GetRandomSpawnPosition();
             var startRotation = Quaternion.Euler(0f, 0f, Random.Range(-_config.angleRangeZ, _config.angleRangeZ));
-            var newObject = Object.Instantiate(prefab, startPosition, startRotation);
+            var newObject = Object.Instantiate(prefab, startPosition, startRotation, _containerTransform);
 
             Object.Destroy(newObject, _config.lifeTime);
             AddForceFruit(newObject);

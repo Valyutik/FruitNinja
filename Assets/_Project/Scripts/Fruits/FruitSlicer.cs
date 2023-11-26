@@ -9,6 +9,7 @@ namespace _Project.Scripts.Fruits
         
         [SerializeField] private float sliceForce = 65;
         
+        private GameEnder _gameEnder;
         private Score _score;
         private Health _health;
         private Collider _slicerTrigger;
@@ -16,8 +17,9 @@ namespace _Project.Scripts.Fruits
         private Vector3 _direction;
 
         [Inject]
-        public void Construct(Score score, Health health)
+        public void Construct(GameEnder gameEnder, Score score, Health health)
         {
+            _gameEnder = gameEnder;
             _score = score;
             _health = health;
             _slicerTrigger = GetComponent<Collider>();
@@ -50,10 +52,9 @@ namespace _Project.Scripts.Fruits
             _score.AddScore(1);
         }
         
-        private void CheckBomb(Component other)
+        private void CheckBomb(Collider other)
         {
             var bomb = other.GetComponent<Bomb>();
-
             if (bomb == null)
             {
                 return;
@@ -61,6 +62,22 @@ namespace _Project.Scripts.Fruits
 
             Destroy(bomb.gameObject);
             _health.RemoveHealth();
+            CheckHealthEnd(_health.GetCurrentHealth());
+        }
+        
+        private void CheckHealthEnd(int health)
+        {
+            if (health > 0)
+            {
+                return;
+            }
+    
+            StopGame();
+        }
+
+        private void StopGame()
+        {
+            _gameEnder.EndGame();
         }
         
         private void Slicing()

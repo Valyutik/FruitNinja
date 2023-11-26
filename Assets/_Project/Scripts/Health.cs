@@ -4,11 +4,13 @@ namespace _Project.Scripts
 {
     public sealed class Health
     {
+        private readonly int _startHealth;
         private readonly TMP_Text _healthText;
         private int _currentHealth;
 
         public Health(int startHealth, TMP_Text healthText)
         {
+            _startHealth = startHealth;
             _healthText = healthText;
             
             SetHealth(startHealth);
@@ -17,6 +19,11 @@ namespace _Project.Scripts
         public void RemoveHealth()
         {
             SetHealth(_currentHealth - 1);
+        }
+        
+        public void Restart()
+        {
+            SetHealth(_startHealth);
         }
         
         private void SetHealth(int value)
@@ -28,6 +35,11 @@ namespace _Project.Scripts
         private void SetHealthText(int value)
         {
             _healthText.text = value.ToString();
+        }
+        
+        public int GetCurrentHealth()
+        {
+            return _currentHealth;
         }
     }
 }

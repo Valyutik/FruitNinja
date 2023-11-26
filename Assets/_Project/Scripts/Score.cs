@@ -18,6 +18,16 @@ namespace _Project.Scripts
             SetScore(_score + value);
         }
         
+        public int GetScore()
+        {
+            return _score;
+        }
+        
+        public void Restart()
+        {
+            SetScore(0);
+        }
+        
         private void SetScore(int value)
         {
             _score = value;

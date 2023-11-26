@@ -1,6 +1,7 @@
 using _Project.Scripts.Fruits;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Zenject;
 
 namespace _Project.Scripts.Installers
@@ -18,6 +19,11 @@ namespace _Project.Scripts.Installers
         [Range(0,10)]
         [SerializeField] private int startHealth;
         
+        [Header("End game")]
+        [SerializeField] private GameObject gameScreen;
+        [SerializeField] private GameObject gameEndScreen;
+        [SerializeField] private TMP_Text gameEndScoreText;
+        
         private FruitSpawnerConfig _fruitSpawnerConfig;
         
         public override void InstallBindings()
@@ -31,6 +37,9 @@ namespace _Project.Scripts.Installers
             
             var health = new Health(startHealth, healthText);
             Container.Bind<Health>().FromInstance(health).AsSingle();
+
+            Container.Bind<GameEnder>().FromNew().AsSingle().WithArguments(gameScreen, gameEndScreen, gameEndScoreText)
+                .NonLazy();
         }
     }
 }
