@@ -7,12 +7,14 @@ namespace _Project.Scripts
     {
         private const string BestScoreKey = "BestScore";
         private readonly TMP_Text _scoreText;
+        private readonly DifficultyChanger _difficultyChanger;
         private int _score;
         private int _bestScore;
         private bool _isNewBestScore;
 
-        public Score(TMP_Text scoreText)
+        public Score(DifficultyChanger difficultyChanger,TMP_Text scoreText)
         {
+            _difficultyChanger = difficultyChanger;
             _scoreText = scoreText;
             LoadBestScore();
             SetScore(0);
@@ -36,7 +38,6 @@ namespace _Project.Scripts
         
         public int GetBestScore()
         {
-            // Получаем значение лучшего счёта
             return _bestScore;
         }
         
@@ -48,6 +49,7 @@ namespace _Project.Scripts
         private void SetScore(int value)
         {
             _score = value;
+            _difficultyChanger.SetDifficultByScore(value);
             SetScoreText(value);
         }
         

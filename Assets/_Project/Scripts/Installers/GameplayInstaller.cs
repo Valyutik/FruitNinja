@@ -16,6 +16,10 @@ namespace _Project.Scripts.Installers
         [Range(0,100)]
         [SerializeField] private int comboMultiplierIncreaseStep = 3;
         
+        [Header("Game difficulty")]
+        [Range(0,100)]
+        [SerializeField] private int difficultyUpScoreStep = 30, maxDifficult = 20;
+        
         [Header("Score")]
         [SerializeField] private TMP_Text scoreText;
 
@@ -34,12 +38,14 @@ namespace _Project.Scripts.Installers
         
         public override void InstallBindings()
         {
+            var difficultyChanger = new DifficultyChanger(difficultyUpScoreStep, maxDifficult);
+            Container.Bind<DifficultyChanger>().FromInstance(difficultyChanger).AsSingle();
+            
             _fruitSpawnerConfig = Resources.Load<FruitSpawnerConfig>("Configs/FruitSpawnerConfig");
-            var fruitSpawner = new FruitSpawner(_fruitSpawnerConfig, container);
-            Container.BindInterfacesAndSelfTo<FruitSpawner>().FromInstance(fruitSpawner).AsSingle().NonLazy();
+            Container.Bind<FruitSpawnerConfig>().FromInstance(_fruitSpawnerConfig).AsSingle();
+            Container.BindInterfacesAndSelfTo<FruitSpawner>().FromNew().AsSingle().WithArguments(container).NonLazy();
 
-            var score = new Score(scoreText);
-            Container.Bind<Score>().FromInstance(score).AsSingle();
+            Container.Bind<Score>().FromNew().AsSingle().WithArguments(scoreText);
             
             var health = new Health(startHealth, healthText);
             Container.Bind<Health>().FromInstance(health).AsSingle();

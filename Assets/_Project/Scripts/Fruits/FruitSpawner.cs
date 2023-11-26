@@ -10,12 +10,14 @@ namespace _Project.Scripts.Fruits
         private readonly FruitSpawnerConfig _config;
         private readonly Collider _container;
         private readonly Transform _containerTransform;
+        private readonly DifficultyChanger _difficultyChanger;
         private float _currentDelay;
         private bool _isActive = true;
 
-        public FruitSpawner(FruitSpawnerConfig config, Collider container)
+        public FruitSpawner(FruitSpawnerConfig config, DifficultyChanger difficultyChanger, Collider container)
         {
             _config = config;
+            _difficultyChanger = difficultyChanger;
             _container = container;
             _containerTransform = container.transform;
             SetNewDelay();
@@ -43,18 +45,20 @@ namespace _Project.Scripts.Fruits
         
         private void SetNewDelay()
         {
-            _currentDelay = Random.Range(_config.minDelay, _config.maxDelay);
+            _currentDelay = _difficultyChanger.CalculateRandomSpawnDelay(_config.minDelay, _config.maxDelay);
         }
         
         private void MoveDelay()
         {
             _currentDelay -= Time.deltaTime;
 
-            if(_currentDelay < 0)
+            if (_currentDelay < 0)
             {
                 var random = Random.value;
 
-                if (random < _config.bombChance)
+                var bombChance = _difficultyChanger.CalculateBombChance(_config.minBombChance, _config.maxBombChance);
+
+                if (random < bombChance)
                 {
                     SpawnBomb();
                 }

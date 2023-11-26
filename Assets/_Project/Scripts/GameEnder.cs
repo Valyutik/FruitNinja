@@ -9,17 +9,19 @@ namespace _Project.Scripts
         private readonly Score _score;
         private readonly Health _health;
         private readonly FruitSpawner _fruitSpawner;
+        private readonly DifficultyChanger _difficultyChanger;
         private readonly GameObject _gameScreen;
         private readonly GameObject _gameEndScreen;
         private readonly TMP_Text _gameEndScoreText;
         private readonly TMP_Text _bestScoreText;
 
-        public GameEnder(Score score, Health health, FruitSpawner fruitSpawner, GameObject gameScreen,
+        public GameEnder(Score score, Health health, FruitSpawner fruitSpawner, DifficultyChanger difficultyChanger, GameObject gameScreen,
             GameObject gameEndScreen, TMP_Text gameEndScoreText, TMP_Text bestScoreText)
         {
             _score = score;
             _health = health;
             _fruitSpawner = fruitSpawner;
+            _difficultyChanger = difficultyChanger;
             _gameScreen = gameScreen;
             _gameEndScreen = gameEndScreen;
             _gameEndScoreText = gameEndScoreText;
@@ -43,6 +45,7 @@ namespace _Project.Scripts
             _fruitSpawner.Restart();
 
             SwitchScreens(true);
+            _difficultyChanger.Restart();
         }
         
         private void SwitchScreens(bool isGame)

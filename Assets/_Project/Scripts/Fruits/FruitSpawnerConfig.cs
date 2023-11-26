@@ -16,6 +16,7 @@ namespace _Project.Scripts.Fruits
             lifeTime = 7f,
             minForce = 15f,
             maxForce = 25f,
-            bombChance = 0.1f;
+            minBombChance = 0.1f,
+            maxBombChance = 0.25f;
     }
 }
