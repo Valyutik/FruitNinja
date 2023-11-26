@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project.Scripts.Bonuses;
+using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.Fruits
@@ -12,6 +13,7 @@ namespace _Project.Scripts.Fruits
         
         private GameEnder _gameEnder;
         private FruitSlicerComboChecker _comboChecker;
+        private SlowMotion _slowMotion;
         private Score _score;
         private Health _health;
         private Collider _slicerTrigger;
@@ -19,10 +21,12 @@ namespace _Project.Scripts.Fruits
         private Vector3 _direction;
 
         [Inject]
-        public void Construct(GameEnder gameEnder, FruitSlicerComboChecker comboChecker, Score score, Health health)
+        public void Construct(GameEnder gameEnder, FruitSlicerComboChecker comboChecker, SlowMotion slowMotion,
+            Score score, Health health)
         {
             _gameEnder = gameEnder;
             _comboChecker = comboChecker;
+            _slowMotion = slowMotion;
             _score = score;
             _health = health;
             _slicerTrigger = GetComponent<Collider>();
@@ -38,8 +42,39 @@ namespace _Project.Scripts.Fruits
         private void OnTriggerEnter(Collider other)
         {
             CheckFruit(other);
-
             CheckBomb(other);
+            CheckHeart(other);
+            CheckSandClocks(other);
+        }
+        
+        private void CheckHeart(Component other)
+        {
+            var heart = other.GetComponentInParent<Heart>();
+
+            if (heart == null)
+            {
+                return;
+            }
+
+            var healthForHeart = heart.HealthForHeart;
+            Destroy(heart.gameObject);
+            _comboChecker.IncreaseComboStep();
+            _health.AddHealth(healthForHeart);
+        }
+        
+        private void CheckSandClocks(Component other)
+        {
+            var sandClocks = other.GetComponent<SandClocks>();
+            if (sandClocks == null)
+            {
+                return;
+            }
+
+            var slowDuration = sandClocks.SlowDuration; 
+            
+            Destroy(sandClocks.gameObject);
+            _comboChecker.IncreaseComboStep();
+            _slowMotion.StartSlow(slowDuration);
         }
         
         private void CheckFruit(Component other)

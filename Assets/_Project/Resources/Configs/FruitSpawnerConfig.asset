@@ -20,10 +20,16 @@ MonoBehaviour:
   - {fileID: 4325229926253813011, guid: 72ebb81dba33a0740938666d55ffe6c5, type: 3}
   <BombsPrefabs>k__BackingField:
   - {fileID: -7111147812153946565, guid: 9b8b622430849de4b8ed634ce6ccad66, type: 3}
+  <HeartPrefab>k__BackingField: {fileID: -2909323055602922741, guid: 5a0537415d4017c4fad7a4986f502dc1, type: 3}
+  <SandClockPrefab>k__BackingField: {fileID: 6756007915002849707, guid: 81dde4db9e926495bbfae9480c3e2894, type: 3}
   minDelay: 0.2
   maxDelay: 0.9
   angleRangeZ: 20
   lifeTime: 7
   minForce: 8
   maxForce: 15
-  bombChance: 0.1
+  fruitWeight: 1
+  minBombWeight: 0.1
+  maxBombWeight: 0.25
+  heartWeight: 0.02
+  sandClocksWeight: 0.04

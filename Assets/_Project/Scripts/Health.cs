@@ -26,6 +26,11 @@ namespace _Project.Scripts
             SetHealth(_startHealth);
         }
         
+        public void AddHealth(int value)
+        {
+            SetHealth(_currentHealth + value);
+        }
+        
         private void SetHealth(int value)
         {
             _currentHealth = value;

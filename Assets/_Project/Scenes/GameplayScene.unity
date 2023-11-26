@@ -1329,7 +1329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9caf3b74ad274b97b12e606c84527c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliceForce: 65
+  sliceForce: 1000
 --- !u!1 &1317790746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,9 +2206,13 @@ MonoBehaviour:
   comboMultiplierText: {fileID: 1461166400}
   comboIncreaseInterval: 1.1
   comboMultiplierIncreaseStep: 3
+  difficultyUpScoreStep: 30
+  maxDifficult: 20
   scoreText: {fileID: 456030999}
   healthText: {fileID: 583571633}
   startHealth: 3
+  normalTimeScale: 1
+  slowMotionTimeScale: 0.7
   gameScreen: {fileID: 40769009}
   gameEndScreen: {fileID: 1317790746}
   gameEndScoreText: {fileID: 1482856829}

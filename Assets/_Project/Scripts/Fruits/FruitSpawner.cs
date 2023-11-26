@@ -52,22 +52,43 @@ namespace _Project.Scripts.Fruits
         {
             _currentDelay -= Time.deltaTime;
 
-            if (_currentDelay < 0)
+            if(_currentDelay < 0)
             {
-                var random = Random.value;
+                GameObject prefab = GetPrefabByWeights();
 
-                var bombChance = _difficultyChanger.CalculateBombChance(_config.minBombChance, _config.maxBombChance);
+                SpawnObject(prefab);
 
-                if (random < bombChance)
-                {
-                    SpawnBomb();
-                }
-                else
-                {
-                    SpawnFruit();
-                }
                 SetNewDelay();
             }
+        }
+        
+        private GameObject GetPrefabByWeights()
+        {
+            float bombWeight = _difficultyChanger.CalculateBombChance(_config.minBombWeight, _config.maxBombWeight);
+            var totalWeight = _config.fruitWeight + bombWeight + _config.heartWeight + _config.sandClocksWeight;
+
+            var random = Random.Range(0, totalWeight);
+
+            if (random <= bombWeight)
+            {
+                return _config.BombsPrefabs[Random.Range(0, _config.BombsPrefabs.Count)].gameObject;
+            }
+    
+            random -= bombWeight;
+
+            if (random <= _config.heartWeight)
+            {
+                return _config.HeartPrefab.gameObject;
+            }
+ 
+            random -= _config.heartWeight;
+
+            if (random <= _config.sandClocksWeight)
+            {
+                return _config.SandClockPrefab.gameObject;
+            }
+
+            return GetRandomFruitPrefab().gameObject;
         }
         
         private void SpawnFruit()

@@ -1,3 +1,4 @@
+using _Project.Scripts.Bonuses;
 using _Project.Scripts.Fruits;
 using TMPro;
 using UnityEngine;
@@ -28,6 +29,10 @@ namespace _Project.Scripts.Installers
         [Range(0,10)]
         [SerializeField] private int startHealth;
         
+        [Header("Slow Motion Bonus")]
+        [Range(0,10)]
+        [SerializeField] private float normalTimeScale = 1, slowMotionTimeScale = 0.7f;
+        
         [Header("End game")]
         [SerializeField] private GameObject gameScreen;
         [SerializeField] private GameObject gameEndScreen;
@@ -55,6 +60,9 @@ namespace _Project.Scripts.Installers
             var fruitSlicerComboChecker = new FruitSlicerComboChecker(comboMultiplierRootGo, comboMultiplierText,
                 comboIncreaseInterval, comboMultiplierIncreaseStep);
             Container.BindInterfacesAndSelfTo<FruitSlicerComboChecker>().FromInstance(fruitSlicerComboChecker).AsSingle();
+
+            Container.BindInterfacesAndSelfTo<SlowMotion>().FromNew().AsSingle()
+                .WithArguments(normalTimeScale, slowMotionTimeScale).NonLazy();
         }
     }
 }
