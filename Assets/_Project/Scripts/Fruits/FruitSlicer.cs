@@ -10,6 +10,14 @@ namespace _Project.Scripts.Fruits
         private const float MinSlicingMove = 0.01f;
         
         [SerializeField] private float sliceForce = 65;
+        [Header("Sounds")]
+        [SerializeField] private AudioClip scoreSound;
+        [SerializeField] private float scoreSoundVolume = 0.45f;
+        [SerializeField] private AudioClip bombSound;
+        [SerializeField] private float bombSoundVolume = 0.3f;
+        [SerializeField] private AudioClip bonusSound;
+        [SerializeField] private float bonusSoundVolume = 0.7f;
+        [SerializeField] private AudioSource soundPlayer;
         
         private GameEnder _gameEnder;
         private FruitSlicerComboChecker _comboChecker;
@@ -60,6 +68,7 @@ namespace _Project.Scripts.Fruits
             Destroy(heart.gameObject);
             _comboChecker.IncreaseComboStep();
             _health.AddHealth(healthForHeart);
+            soundPlayer.PlayOneShot(bonusSound, bonusSoundVolume);
         }
         
         private void CheckSandClocks(Component other)
@@ -75,6 +84,7 @@ namespace _Project.Scripts.Fruits
             Destroy(sandClocks.gameObject);
             _comboChecker.IncreaseComboStep();
             _slowMotion.StartSlow(slowDuration);
+            soundPlayer.PlayOneShot(bonusSound, bonusSoundVolume);
         }
         
         private void CheckFruit(Component other)
@@ -90,6 +100,7 @@ namespace _Project.Scripts.Fruits
             _comboChecker.IncreaseComboStep();
             var scoreByFruit = 1 * _comboChecker.GetComboMultiplier();
             _score.AddScore(scoreByFruit);
+            soundPlayer.PlayOneShot(scoreSound, scoreSoundVolume);
         }
         
         private void CheckBomb(Component other) 
@@ -103,7 +114,7 @@ namespace _Project.Scripts.Fruits
             Destroy(bomb.gameObject);
             _health.RemoveHealth();
             CheckHealthEnd(_health.GetCurrentHealth());
-
+            soundPlayer.PlayOneShot(bombSound, bombSoundVolume);
             _comboChecker.StopCombo();
         }
         

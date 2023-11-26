@@ -14,9 +14,11 @@ namespace _Project.Scripts
         private readonly GameObject _gameEndScreen;
         private readonly TMP_Text _gameEndScoreText;
         private readonly TMP_Text _bestScoreText;
+        private readonly AudioSource _backgroundMusic;
+        private readonly AudioSource _gameOverSound;
 
         public GameEnder(Score score, Health health, FruitSpawner fruitSpawner, DifficultyChanger difficultyChanger, GameObject gameScreen,
-            GameObject gameEndScreen, TMP_Text gameEndScoreText, TMP_Text bestScoreText)
+            GameObject gameEndScreen, TMP_Text gameEndScoreText, TMP_Text bestScoreText, AudioSource backgroundMusic, AudioSource gameOverSound)
         {
             _score = score;
             _health = health;
@@ -26,26 +28,42 @@ namespace _Project.Scripts
             _gameEndScreen = gameEndScreen;
             _gameEndScoreText = gameEndScoreText;
             _bestScoreText = bestScoreText;
+            _backgroundMusic = backgroundMusic;
+            _gameOverSound = gameOverSound;
             SwitchScreens(true);
+            SwitchMusic(true);
         }
         
         public void EndGame()
         {
             _fruitSpawner.Stop();
             SwitchScreens(false);
+            SwitchMusic(false);
             RefreshScores();
         }
         
         public void RestartGame()
         {
             _score.Restart();
-
             _health.Restart();
-
             _fruitSpawner.Restart();
+            _difficultyChanger.Restart();
 
             SwitchScreens(true);
-            _difficultyChanger.Restart();
+            SwitchMusic(true);
+        }
+        
+        private void SwitchMusic(bool isGame)
+        {
+            if (isGame)
+            {
+                _backgroundMusic.Play();
+            }
+            else
+            {
+                _backgroundMusic.Stop();
+                _gameOverSound.Play();
+            }
         }
         
         private void SwitchScreens(bool isGame)

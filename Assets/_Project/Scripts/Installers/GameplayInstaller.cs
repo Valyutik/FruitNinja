@@ -38,6 +38,7 @@ namespace _Project.Scripts.Installers
         [SerializeField] private GameObject gameEndScreen;
         [SerializeField] private TMP_Text gameEndScoreText;
         [SerializeField] private TMP_Text bestScoreText;
+        [SerializeField] private AudioSource backgroundMusic, gameOverSound;
         
         private FruitSpawnerConfig _fruitSpawnerConfig;
         
@@ -55,7 +56,8 @@ namespace _Project.Scripts.Installers
             var health = new Health(startHealth, healthText);
             Container.Bind<Health>().FromInstance(health).AsSingle();
 
-            Container.Bind<GameEnder>().FromNew().AsSingle().WithArguments(gameScreen, gameEndScreen, gameEndScoreText, bestScoreText);
+            Container.Bind<GameEnder>().FromNew().AsSingle().WithArguments(gameScreen, gameEndScreen, gameEndScoreText,
+                bestScoreText, backgroundMusic, gameOverSound);
 
             var fruitSlicerComboChecker = new FruitSlicerComboChecker(comboMultiplierRootGo, comboMultiplierText,
                 comboIncreaseInterval, comboMultiplierIncreaseStep);
