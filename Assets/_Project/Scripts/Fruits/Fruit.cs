@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Project.Scripts
+namespace _Project.Scripts.Fruits
 {
     [RequireComponent(typeof(Rigidbody), typeof(Collider))]
     public class Fruit : MonoBehaviour

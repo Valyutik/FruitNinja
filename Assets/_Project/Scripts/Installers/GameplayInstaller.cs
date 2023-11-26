@@ -1,11 +1,14 @@
+using _Project.Scripts.Fruits;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.Installers
 {
-    public class GameplayInstaller : MonoInstaller
+    public sealed class GameplayInstaller : MonoInstaller
     {
         [SerializeField] private Collider container;
+        [SerializeField] private TMP_Text scoreText;
         private FruitSpawnerConfig _fruitSpawnerConfig;
         
         public override void InstallBindings()
@@ -13,6 +16,8 @@ namespace _Project.Scripts.Installers
             _fruitSpawnerConfig = Resources.Load<FruitSpawnerConfig>("Configs/FruitSpawnerConfig");
             var fruitSpawner = new FruitSpawner(_fruitSpawnerConfig, container);
             Container.BindInterfacesAndSelfTo<FruitSpawner>().FromInstance(fruitSpawner).AsSingle().NonLazy();
+
+            var score = new Score(scoreText);
         }
     }
 }

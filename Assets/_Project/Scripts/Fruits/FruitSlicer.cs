@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace _Project.Scripts
+namespace _Project.Scripts.Fruits
 {
-    public class FruitSlicer : MonoBehaviour
+    public sealed class FruitSlicer : MonoBehaviour
     {
         private const float MinSlicingMove = 0.01f;
         

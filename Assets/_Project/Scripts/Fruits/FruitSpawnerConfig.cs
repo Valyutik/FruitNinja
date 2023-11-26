@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.Scripts
+namespace _Project.Scripts.Fruits
 {
     [CreateAssetMenu(fileName = "FruitSpawnerConfig", menuName = "Configs/FruitSpawnerConfig")]
-    public class FruitSpawnerConfig : ScriptableObject
+    public sealed class FruitSpawnerConfig : ScriptableObject
     {
         [field: SerializeField] public List<Fruit> FruitPrefabs { get; private set; }
         [field: Range(0,100)]
