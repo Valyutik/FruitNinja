@@ -5,7 +5,7 @@ namespace _Project.Scripts.Fruits
     [RequireComponent(typeof(Rigidbody), typeof(Collider))]
     public class Fruit : MonoBehaviour
     {
-        public Rigidbody Rigidbody { get; private set; }
+        private Rigidbody Rigidbody { get; set; }
         public Transform Transform { get; private set; }
         
         [SerializeField] private GameObject wholeFruit;
@@ -15,7 +15,7 @@ namespace _Project.Scripts.Fruits
 
         private Collider _sliceTrigger;
 
-        public void Initialize()
+        public void Awake()
         {
             Rigidbody = GetComponent<Rigidbody>();
             _sliceTrigger = GetComponent<Collider>();

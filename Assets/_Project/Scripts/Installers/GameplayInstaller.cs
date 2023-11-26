@@ -7,8 +7,17 @@ namespace _Project.Scripts.Installers
 {
     public sealed class GameplayInstaller : MonoInstaller
     {
+        [Header("Fruits")]
         [SerializeField] private Collider container;
+        
+        [Header("Score")]
         [SerializeField] private TMP_Text scoreText;
+
+        [Header("Health")]
+        [SerializeField] private TMP_Text healthText;
+        [Range(0,10)]
+        [SerializeField] private int startHealth;
+        
         private FruitSpawnerConfig _fruitSpawnerConfig;
         
         public override void InstallBindings()
@@ -18,6 +27,10 @@ namespace _Project.Scripts.Installers
             Container.BindInterfacesAndSelfTo<FruitSpawner>().FromInstance(fruitSpawner).AsSingle().NonLazy();
 
             var score = new Score(scoreText);
+            Container.Bind<Score>().FromInstance(score).AsSingle();
+            
+            var health = new Health(startHealth, healthText);
+            Container.Bind<Health>().FromInstance(health).AsSingle();
         }
     }
 }

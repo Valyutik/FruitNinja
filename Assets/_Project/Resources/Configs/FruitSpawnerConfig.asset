@@ -18,9 +18,12 @@ MonoBehaviour:
   - {fileID: 4325229926253813011, guid: b6d4ce54419a97f48ba46bf930fcd71b, type: 3}
   - {fileID: 4325229926253813011, guid: 33642368549beb2408ed55b03036d540, type: 3}
   - {fileID: 4325229926253813011, guid: 72ebb81dba33a0740938666d55ffe6c5, type: 3}
+  <BombsPrefabs>k__BackingField:
+  - {fileID: -7111147812153946565, guid: 9b8b622430849de4b8ed634ce6ccad66, type: 3}
   minDelay: 0.2
   maxDelay: 0.9
   angleRangeZ: 20
   lifeTime: 7
   minForce: 8
   maxForce: 15
+  bombChance: 0.1

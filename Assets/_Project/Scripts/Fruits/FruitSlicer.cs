@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Fruits
 {
@@ -8,12 +9,17 @@ namespace _Project.Scripts.Fruits
         
         [SerializeField] private float sliceForce = 65;
         
+        private Score _score;
+        private Health _health;
         private Collider _slicerTrigger;
         private Camera _mainCamera;
         private Vector3 _direction;
 
-        public void Start()
+        [Inject]
+        public void Construct(Score score, Health health)
         {
+            _score = score;
+            _health = health;
             _slicerTrigger = GetComponent<Collider>();
             _mainCamera = Camera.main;
             SetSlicing(false);
@@ -26,6 +32,13 @@ namespace _Project.Scripts.Fruits
         
         private void OnTriggerEnter(Collider other)
         {
+            CheckFruit(other);
+
+            CheckBomb(other);
+        }
+        
+        private void CheckFruit(Component other)
+        {
             var fruit = other.GetComponent<Fruit>();
 
             if (fruit == null)
@@ -34,6 +47,20 @@ namespace _Project.Scripts.Fruits
             }
 
             fruit.Slice(_direction, transform.position, sliceForce);
+            _score.AddScore(1);
+        }
+        
+        private void CheckBomb(Component other)
+        {
+            var bomb = other.GetComponent<Bomb>();
+
+            if (bomb == null)
+            {
+                return;
+            }
+
+            Destroy(bomb.gameObject);
+            _health.RemoveHealth();
         }
         
         private void Slicing()
