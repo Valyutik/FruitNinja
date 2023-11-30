@@ -5,4 +5,4 @@ Fruit Ninja game, made as part of the course "Future Code | C# in Unity: from ze
 
 ## Gameplay
 
-![Gameplay](https://i.ibb.co/hVTJsrP/image.gif)
+![Gameplay](Docs/Gameplay.gif)
