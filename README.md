@@ -1,2 +1,8 @@
 # FruitNinja
-Unity проект для курса "Код будущего | C# в Unity: с нуля до игр с мультиплеером" от Яндекса.
+
+## About
+Fruit Ninja game, made as part of the course "Future Code | C# in Unity: from zero to multiplayer games" from Yandex.
+
+## Gameplay
+
+![Gameplay](https://i.ibb.co/hVTJsrP/image.gif)
